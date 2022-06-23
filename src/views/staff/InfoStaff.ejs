@@ -1,0 +1,56 @@
+<%- include ('../includes/head.ejs')%>
+    <%- include ('../includes/navbar.ejs')%>
+        <div class="info-staff__wrapper">
+            <form action="/staff/infoStaff/edit" method="POST" enctype="multipart/form-data">
+                <h2 class="info-staff__title">Thông Tin Nhân Viên</h2>
+                <div class="grid">
+                    <div>
+                        <div class="info-staff__item">
+                            <p><i class="fas fa-id-card"></i>
+                                <%=staff._id.toString()%>
+                            </p>
+                        </div>
+                        <div class="info-staff__item">
+                            <p><i class="fas fa-user"></i>
+                                <%= staff.name %>
+                            </p>
+                        </div>
+                        <div class="info-staff__item">
+                            <p>
+                                <i class="fas fa-birthday-cake"></i>
+                                <%= staff.dOB.toLocaleDateString() %>
+                            </p>
+                        </div>
+                        <div class="info-staff__item">
+                            <p>
+                                <i class="fas fa-coins"></i>
+                                <%= staff.salaryScale %>
+                            </p>
+                        </div>
+                        <div class="info-staff__item">
+                            <p>
+                                <i class="fas fa-user-cog"></i>
+                                <%= staff.department %>
+                            </p>
+                        </div>
+                        <div class="info-staff__item">
+                            <p>
+                                <i class="fas fa-calendar-times"></i>
+                                <%= staff.annualLeave %> ngày
+                            </p>
+                        </div>
+                        <div class="info-staff__item">
+                            <i class="fas fa-portrait"></i>
+                            <input type="file" name="image">
+                        </div>
+                    </div>
+                    <div>
+                        <img class="info-staff__img" src="/<%=staff.image %>" alt="avatar">
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                <button class="info-staff__btn" type="submit">Chỉnh Sửa</button>
+            </form>
+        </div>
+        </div>
+        <%- include ('../includes/end.ejs')%>

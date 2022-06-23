@@ -1,0 +1,16 @@
+<%- include ('../includes/head.ejs')%>
+    <%- include ('../includes/navbar.ejs')%>
+        <%-include ('../includes/attendanceButton.ejs', {confirmed})%>
+            <div class="centered">
+                <% if (!confirmed) { %>
+                    <h2 class="index__title">Tháng này đã được tính lương </h2>
+                    <%}else{%>
+                        <% if (isStarted) { %>
+                            <h2 class="index__title">Xin Chào!!!</h3>
+                                <p>Bạn đã Bắt Đầu. Mời Bạn Chọn Kết Thúc</p>
+                                <% }else{%>
+                                    <h2 class="index__title">Xin Chào!!!</h3>
+                                        <p>Bạn Chưa Bắt Đầu. Mời Bạn Chọn Bắt Đầu</p>
+                                        <% }} %>
+            </div>
+            <%- include ('../includes/end.ejs')%>

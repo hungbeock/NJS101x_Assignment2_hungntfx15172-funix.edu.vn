@@ -1,0 +1,27 @@
+<%- include ('../includes/head.ejs')%>
+    <%- include ('../includes/navbar.ejs')%>
+        <%-include ('../includes/attendanceButton.ejs')%>
+
+            <div class="attendace-info">
+                <h3 class="attendace-info__title">Số Giờ Đã Làm Hôm Nay: </h3>
+                <p class="attendace-info__text">
+                    <%= timeWorked%> Giờ
+                </p>
+                <h3 class="attendace-info__title">Danh sách các lượt bắt đầu, kết thúc:</h3>
+                <ul class="attendace-info__list">
+                    <% workedInDay.workTimeInDay.forEach(workTime=> {%>
+                        <li class="attendace-info__item">
+                            <p>Bắt Đầu: <%=workTime.startTime.toLocaleString()%>
+                            </p>
+                            <p>
+                                Nơi làm Việc:<%= workTime.workPlace==='home' ? ' Nhà' : workTime.workPlace==='company'
+                                    ? ' Công ty' : ' Khách Hàng' %>
+                            </p>
+                            <p>Kết thúc: <%=workTime.endTime.toLocaleString()%>
+                            </p>
+                        </li>
+                        <% })%>
+                </ul>
+            </div>
+            </div>
+            <%- include ('../includes/end.ejs')%>

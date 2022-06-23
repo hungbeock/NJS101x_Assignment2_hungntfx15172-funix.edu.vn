@@ -1,0 +1,108 @@
+<%- include ('../includes/head.ejs')%>
+    <%- include ('../includes/navbar.ejs')%>
+        <div class="grid">
+            <div class="referenceStaff__wrapper">
+                <h3 class="referenceStaff__title">Danh sách lượt làm</h3>
+                <% if (role==='admin' ) { %>
+                    <p>Id quản lý: <%=staff._id%>
+                    </p>
+                    <p>Tên quản lý: <%=staff.name%>
+                    </p>
+                    <%}%>
+                        <table class="referenceStaff__table">
+                            <tr>
+                                <th colspan="2">Ngày</th>
+                                <th colspan="2">Giờ bắt đầu</th>
+                                <th colspan="2">Giờ kết thúc</th>
+                                <th colspan="2">Nơi làm việc</th>
+                                <th colspan="2">Giờ làm thêm</th>
+                            </tr>
+                            <% workTimes.forEach(workTime=>{%>
+                                <tr>
+                                    <td colspan="2">
+                                        <%=workTime.startTime.getDate()%>
+                                    </td>
+                                    <td colspan="2">
+                                        <%=workTime.startTime.getHours()%>:<%=workTime.startTime.getMinutes()%>h
+                                    </td>
+                                    <td colspan="2">
+                                        <%=workTime.endTime.getHours()%>:<%=workTime.endTime.getMinutes()%>h
+                                    </td>
+                                    <td colspan="2">
+                                        <%= workTime.workPlace==='home' ? ' Nhà' : workTime.workPlace==='company'
+                                            ? ' Công ty' : ' Khách Hàng' %>
+                                    </td>
+                                    <td colspan="2">
+                                        <% const hoursEnd=workTime.endTime.getHours(); const
+                                            hoursStart=workTime.startTime.getHours(); const totalTimeWork=(hoursEnd* 60
+                                            +workTime.endTime.getMinutes()) - (hoursStart*60 +
+                                            workTime.startTime.getMinutes()); %>
+                                            <%= totalTimeWork/60 - 8 < 0 ? 0 : (totalTimeWork/60 - 8).toFixed(2) %>
+                                    </td>
+                                </tr>
+                                <% } )%>
+                        </table>
+                        <p class="referenceStaff__article">
+                            Tổng số giờ làm lần này <%=lastTimeWorked%>
+                        </p>
+                        <div class="grid">
+                            <p class="referenceStaff__article">Số dòng giờ làm hiển thị</p>
+                            <div class="grid align-center">
+                                <a class="pagination" href="?rowPerPage=20">20 dòng</a>
+                                <a class="pagination" href="?rowPerPage=40">40 dòng</a>
+                            </div>
+
+                        </div>
+
+            </div>
+            <div class="referenceStaff__wrapper">
+                <h3 class="referenceStaff__title">Danh sách đăng ký nghỉ phép</h3>
+                <table class="referenceStaff__table">
+                    <tr>
+                        <th>Ngày</th>
+                        <th colspan="3">Số Giờ</th>
+                        <th colspan="3">Lý do</th>
+                    </tr>
+                    <tr>
+                        <%staff.leaveInfoList.forEach(leaveInfo=> {%>
+                            <td>
+                                <%=leaveInfo.daysLeave%>
+                            </td>
+                            <td colspan="3">
+                                <%=leaveInfo.timesLeave%>
+                            </td>
+                            <td colspan="3">
+                                <%=leaveInfo.reason%>
+                            </td>
+                            <%})%>
+                    </tr>
+                </table>
+            </div>
+            <div class="referenceStaff__wrapper">
+                <h3 class="referenceStaff__title">Chi tiết Lương</h3>
+                <form class="form-select-month" action="/staff/reference" method="POST">
+                    <label for="month">Tháng</label>
+                    <select class="select-month" name="month" id="month">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                </form>
+                <p class="referenceStaff__salary">
+                    <%= salary > 0 ? 3000000 : salary %>hi
+                </p>
+            </div>
+        </div>
+        </div>
+        <div class="blank"></div>
+        <%- include ('../includes/end.ejs')%>

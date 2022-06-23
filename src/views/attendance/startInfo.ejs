@@ -1,0 +1,21 @@
+<%- include ('../includes/head.ejs')%>
+    <%- include ('../includes/navbar.ejs')%>
+        <%-include ('../includes/attendanceButton.ejs')%>
+            <div class="attendace-info">
+                <h3 class="attendace-info__title">Tên Nhân Viên</h3>
+                <p class="attendace-info__text">
+                    <%=staff.name%>
+                </p>
+                <h3 class="attendace-info__title">Nơi Làm Việc</h3>
+                <p class="attendace-info__text">
+                    <%= lastStart.workPlace==='home' ? 'Nhà' : lastStart.workPlace==='company' ? 'Công ty'
+                        : 'Khách Hàng' %>
+                </p>
+                <h3 class="attendace-info__title">Giờ Bắt Đầu</h3>
+                <p class="attendace-info__text">
+                    <%= lastStart.startTime.toLocaleString()%>
+                </p>
+                <h3 class="attendace-info__title">Chúc Bạn Làm Việc Vui Vẻ</h3>
+            </div>
+            </div>
+            <%- include ('../includes/end.ejs')%>
