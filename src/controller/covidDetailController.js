@@ -79,18 +79,29 @@ class CovidDetailController {
         Staff.findById(req.params.id)
             .then((staff) => {
                 const doc = new PDFDocument();
+                const invoicePath = path.join('data', 'invoices', invoiceName);
                 const pathDoc = path.join('data', 'pdf');
                 res.setHeader('Content-Type', 'application/pdf');
-                res.setHeader('Content-Disposition', 'inline');
-                doc.pipe(fs.createWriteStream(pathDoc));
+                res.setHeader(
+                    'Content-Disposition',
+                    'inline; filename="' + invoiceName + '"'
+                );
+                doc.pipe(fs.createWriteStream(invoicePath));
                 doc.pipe(res);
-                doc.text('Tên nhân viên: ' + staff.name);
-                doc.text('Nhiệt độ: ' + staff.bodyTemperature[0].temperature);
-                doc.text('Vaccine mũi một: ' + staff.vaccineInfo[0].nameVaccine);
-                doc.text('Ngày tiêm: ' + staff.vaccineInfo[0].date.toISOString());
-                doc.text('Vaccine mũi một: ' + staff.vaccineInfo[1].nameVaccine);
-                doc.text('Ngày tiêm: ' + staff.vaccineInfo[1].date.toISOString());
-                doc.end();
+                // doc.text('Tên nhân viên: ' + staff.name);
+                // doc.text('Nhiệt độ: ' + staff.bodyTemperature[0].temperature);
+                // doc.text('Vaccine mũi một: ' + staff.vaccineInfo[0].nameVaccine);
+                // doc.text('Ngày tiêm: ' + staff.vaccineInfo[0].date.toISOString());
+                // doc.text('Vaccine mũi một: ' + staff.vaccineInfo[1].nameVaccine);
+                // doc.text('Ngày tiêm: ' + staff.vaccineInfo[1].date.toISOString());
+                // doc.end();
+                doc.text(
+                    'Tên nhân viên: ' + staff.name,
+                    'Nhiệt độ: ' + staff.bodyTemperature[0].temperature,
+                    'Vaccine mũi một: ' + staff.vaccineInfo[0].nameVaccine,
+                    'Ngày tiêm: ' + staff.vaccineInfo[0].date.toISOString()
+                
+                )
             })
             .catch((error) => {
                 console.log(error);

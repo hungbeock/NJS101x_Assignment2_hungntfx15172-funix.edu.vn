@@ -46,7 +46,7 @@
                             Tổng số giờ làm lần này <%=lastTimeWorked%>
                         </p>
                         <div class="grid">
-                            <p class="referenceStaff__article">Số dòng giờ làm hiển thị</p>
+                            <p class="referenceStaff__article">Số dòng giờ làm hiển thị </p>
                             <div class="grid align-center">
                                 <a class="pagination" href="?rowPerPage=20">20 dòng</a>
                                 <a class="pagination" href="?rowPerPage=40">40 dòng</a>
@@ -83,7 +83,7 @@
                 <form class="form-select-month" action="/staff/reference" method="POST">
                     <label for="month">Tháng</label>
                     <select class="select-month" name="month" id="month">
-                        <option value="1">1</option>
+                        <option value="<%=lastTimeWorked%>">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -99,9 +99,11 @@
                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                 </form>
                 <p class="referenceStaff__salary">
-                    <%= salary > 0 ? 3000000 : salary %>hi
+                    <!-- <%= salary > 0 ? 3000000 : salary %> -->
+                    <%= timeWorked%>
                 </p>
             </div>
+            
         </div>
         </div>
         <div class="blank"></div>

@@ -77,6 +77,7 @@ class StaffController {
             staff: req.staff, // staff
             day, // arry of info annual leave
             salary,
+            workTimes
         });
     }
 }
